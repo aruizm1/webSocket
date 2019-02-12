@@ -1,1 +1,1 @@
-web: node dist/classes/index.js
+web: node dist/index.js
