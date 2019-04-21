@@ -45,6 +45,8 @@ export default class Server {
             socket.marcadorNuevo( cliente );
             socket.marcadorBorrar( cliente );
             socket.marcadorMover( cliente );
+            socket.emitRoute( cliente, this.io  );
+
 
 
 
@@ -61,8 +63,8 @@ export default class Server {
             socket.mensaje( cliente, this.io );
 
             // Desconectar
-            socket.desconectar( cliente, this.io );    
-            
+            socket.desconectar( cliente, this.io );
+
 
         });
 

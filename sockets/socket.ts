@@ -8,6 +8,20 @@ export const usuariosConectados = new UsuariosLista();
 
 
 // Mapas
+export const emitRoute = (cliente: Socket, io: socketIO.Server) => {
+    cliente.on( 'position-courier', (   ) => {
+        let count = 0;
+        let int = setInterval(()=>{
+            count = (count + 1) % 200;
+            if((((count + 1) % 200)/ 2) === 99.5) {
+                clearInterval(int);
+            }
+            io.emit( 'actual-position', `${((count + 1) % 200)/ 2}%` );
+        }, 100);
+
+    });
+}
+
 export const marcadorNuevo = ( cliente: Socket ) => {
 
     cliente.on( 'marcador-nuevo', ( marcador ) => {
@@ -100,7 +114,7 @@ export const obtenerUsuarios = ( cliente: Socket, io: socketIO.Server ) => {
     cliente.on('obtener-usuarios', () => {
 
         io.to( cliente.id ).emit('usuarios-activos', usuariosConectados.getLista()  );
-        
+
     });
 
 }
